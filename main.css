@@ -1,0 +1,42 @@
+
+  
+
+ button {
+     background-color: white;
+        padding: 20px;
+        font-size: 25px;
+        width: 100px;
+        height: 67px;
+        border: 0.5px solid grey;
+ }
+ .item15, .item16, .item17, .item18, .item20 {
+     background-color: rgba(255, 255, 0, 0.445); 
+ }
+ h1  {
+     text-align: center;
+     font-size: 22px;
+ }
+ table th td {
+     padding: 20px;
+     align-content: center;
+     
+
+ }
+ td {
+     width: 150px;
+     height: 100px;
+ }
+#zero {
+    width: 200px;
+}
+#clear {
+    width: 200px;
+}
+#display1 {
+    width: 510px;
+    text-align: center;
+    padding: 20px;
+   
+    border: 3px solid black;
+
+}

@@ -1,42 +1,50 @@
 
-  
+  body {
+    background-image: url(menger.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; 
+    
+    }
 
  button {
      background-color: white;
-        padding: 20px;
+        padding: 2px;
         font-size: 25px;
         width: 100px;
         height: 67px;
         border: 0.5px solid grey;
  }
  .item15, .item16, .item17, .item18, .item20 {
-     background-color: rgba(255, 255, 0, 0.445); 
+     background-color: yellow; 
  }
  h1  {
      text-align: center;
      font-size: 22px;
  }
  table th td {
-     padding: 20px;
+     padding: 2px;
      align-content: center;
      
 
  }
  td {
-     width: 150px;
-     height: 100px;
+     width: 110px;
+     height: 74px;
  }
 #zero {
-    width: 200px;
+    width: 215px;
 }
 #clear {
-    width: 200px;
+    width: 215px;
 }
 #display1 {
-    width: 510px;
-    text-align: center;
+    width: 400px;
+    text-align: right;
     padding: 20px;
    
     border: 3px solid black;
 
+}
+#cont2 {
+margin-left: calc(50% - 300px)
 }

@@ -18,7 +18,7 @@ class App extends React.Component {
         <div id="display1"> {this.state.display} </div>
 
         <div className="item11" id="displayMemory"> {this.state.score}</div>
-        <div className="item12" id="display">12</div>
+
         <table><tbody>
           <tr><td colSpan="2"> <button className="item13" id="clear" onClick={this.handleClear}>C</button></td>
             <td><button onClick={this.handleButton} className="item14" value="%">%</button></td>
@@ -39,12 +39,106 @@ class App extends React.Component {
           </tr><tr>
             <td colSpan="2"> <button onClick={this.handleClick} className="item0" value="0" id="zero">0</button></td>
             <td><button onClick={this.handleClick} className="item19" id="decimal" value=".">.</button></td>
-            <td><button onClick={this.handleClick} className="item20">=</button></td></tr>
+            <td><button onClick={this.handleEqls} className="item20">=</button></td></tr>
         </tbody></table>
       </div>
 
     );
   }
+
+  handleEqls = () => {
+    let result
+
+    let regex = /[-,+,*,/]/gi
+
+    let res = this.state.display.split(regex)
+    let ops = this.state.display.match(regex)
+
+
+    while (ops.indexOf("*") >= 0) {
+      let value1 = res[ops.indexOf("*")]
+      let value2 = res[ops.indexOf("*") + 1]
+
+      let mjau = (value1 * value2)
+      result = mjau
+      //ubacujem rezultat na mesto druge vrednosti
+      res[ops.indexOf("*") + 1] = mjau
+      // brisem prvu vrednost i izvrsenu operaciju
+      res.splice(ops.indexOf("*"), 1)
+      ops.splice(ops.indexOf("*"), 1)
+
+
+    }
+
+
+    while (ops.indexOf("/") >= 0) {
+      let value1 = res[ops.indexOf("/")]
+      let value2 = res[ops.indexOf("/") + 1]
+      if (value2 == 0) {
+        this.setState({
+          input: "",
+          display: "",
+        });
+        return
+      }
+      console.log(value1)
+      console.log(value2)
+      if (value2 !== 0) {
+        let mjau = (value1 / value2).toFixed(6)
+        result = mjau
+
+        //ubacujem rezultat na mesto druge vrednosti
+        res[ops.indexOf("/") + 1] = mjau
+        // brisem prvu vrednost i izvrsenu operaciju
+        res.splice(ops.indexOf("/"), 1)
+        ops.splice(ops.indexOf("/"), 1)
+
+
+      }
+
+    }
+
+
+    while (ops.indexOf("+") >= 0) {
+      let value1 = res[ops.indexOf("+")]
+      let value2 = res[ops.indexOf("+") + 1]
+
+      let mjau = Number(value1) + Number(value2)
+      result = mjau
+
+      //ubacujem rezultat na mesto druge vrednosti
+      res[ops.indexOf("+") + 1] = mjau
+      // brisem prvu vrednost i izvrsenu operaciju
+      res.splice(ops.indexOf("+"), 1)
+      ops.splice(ops.indexOf("+"), 1)
+
+
+    }
+
+    while (ops.indexOf("-") >= 0) {
+      let value1 = res[ops.indexOf("-")]
+      let value2 = res[ops.indexOf("-") + 1]
+
+      let mjau = value1 - value2
+      result = mjau
+
+      //ubacujem rezultat na mesto druge vrednosti
+      res[ops.indexOf("-") + 1] = mjau
+      // brisem prvu vrednost i izvrsenu operaciju
+      res.splice(ops.indexOf("-"), 1)
+      ops.splice(ops.indexOf("-"), 1)
+
+
+    }
+
+
+    this.setState({
+      input: "",
+      display: result,
+    });
+  }
+
+
 
   handleClick = (event) => {
 

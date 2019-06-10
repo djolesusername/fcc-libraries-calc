@@ -34,10 +34,10 @@
 #zero {
     width: 215px;
 }
-#clear {
+#erase {
     width: 215px;
 }
-#display1, .item11{
+#display, .item11{
     width: 400px;
     text-align: right;
     padding: 20px;

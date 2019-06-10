@@ -4,7 +4,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       input: "",
-      display: "",
+      display: "0",
       value0: 0,
       memory: [],
       score: 0,
@@ -15,13 +15,12 @@ class App extends React.Component {
   render() {
     return (
       <div id="cont2">
-        <div id="display1"> {this.state.display} </div>
+        <div id="display"> {this.state.display} </div>
 
-        <div className="item11" id="displayMemory"> {this.state.score}</div>
 
         <table><tbody>
-          <tr><td colSpan="2"> <button className="item13" id="clear" onClick={this.handleClear}>C</button></td>
-            <td><button onClick={this.handleButton} className="item14" value="%">%</button></td>
+          <tr><td colSpan="2"> <button className="item13" id="erase" onClick={this.handleClear}>C</button></td>
+            <td><button onClick={this.handleReset} className="item14" id="clear" >CE</button></td>
             <td><button onClick={this.handleButton} className="item15" value="/" id="divide">:</button></td></tr>
           <tr><td><button onClick={this.handleClick} className="item7" id="seven" value="7">7</button></td>
             <td><button onClick={this.handleClick} className="item8" value="8" id="eight">8</button></td>
@@ -39,7 +38,7 @@ class App extends React.Component {
           </tr><tr>
             <td colSpan="2"> <button onClick={this.handleClick} className="item0" value="0" id="zero">0</button></td>
             <td><button onClick={this.handleClick} className="item19" id="decimal" value=".">.</button></td>
-            <td><button onClick={this.handleEqls} className="item20">=</button></td></tr>
+            <td><button onClick={this.handleEqls} id="equals" className="item20">=</button></td></tr>
         </tbody></table>
       </div>
 
@@ -81,10 +80,9 @@ class App extends React.Component {
         });
         return
       }
-      console.log(value1)
-      console.log(value2)
+
       if (value2 !== 0) {
-        let mjau = (value1 / value2).toFixed(6)
+        let mjau = (value1 / value2)
         result = mjau
 
         //ubacujem rezultat na mesto druge vrednosti
@@ -98,22 +96,6 @@ class App extends React.Component {
 
     }
 
-
-    while (ops.indexOf("+") >= 0) {
-      let value1 = res[ops.indexOf("+")]
-      let value2 = res[ops.indexOf("+") + 1]
-
-      let mjau = Number(value1) + Number(value2)
-      result = mjau
-
-      //ubacujem rezultat na mesto druge vrednosti
-      res[ops.indexOf("+") + 1] = mjau
-      // brisem prvu vrednost i izvrsenu operaciju
-      res.splice(ops.indexOf("+"), 1)
-      ops.splice(ops.indexOf("+"), 1)
-
-
-    }
 
     while (ops.indexOf("-") >= 0) {
       let value1 = res[ops.indexOf("-")]
@@ -130,10 +112,25 @@ class App extends React.Component {
 
 
     }
+    while (ops.indexOf("+") >= 0) {
+      let value1 = res[ops.indexOf("+")]
+      let value2 = res[ops.indexOf("+") + 1]
+
+      let mjau = Number(value1) + Number(value2)
+      result = mjau
+
+      //ubacujem rezultat na mesto druge vrednosti
+      res[ops.indexOf("+") + 1] = mjau
+      // brisem prvu vrednost i izvrsenu operaciju
+      res.splice(ops.indexOf("+"), 1)
+      ops.splice(ops.indexOf("+"), 1)
+
+
+    }
 
 
     this.setState({
-      input: "",
+      input: result,
       display: result,
     });
   }
@@ -141,8 +138,17 @@ class App extends React.Component {
 
 
   handleClick = (event) => {
-
+    // Ne dozvoljava dve .. u istom broju
     if (event.target.value == "." && this.state.input.indexOf(".") >= 0) { return }
+
+    // Inicijalizacija sa 0 - brisanje 0 posle prvog unosa
+    if (this.state.display == "0") {
+
+      this.setState({
+        display: event.target.value
+      });
+      return
+    }
     this.setState({
       input: this.state.input + event.target.value,
       display: this.state.display + event.target.value
@@ -155,6 +161,15 @@ class App extends React.Component {
     this.setState({
       input: inp,
       display: clr,
+
+    });
+  }
+
+  handleReset = () => {
+
+    this.setState({
+      input: "",
+      display: "0",
 
     });
   }
@@ -173,8 +188,9 @@ class App extends React.Component {
       this.state.display.endsWith("/")
     ) {
       let tem = this.state.display.slice(0, -1)
-      tem.concat(event.target.value)
-      console.log(tem)
+
+      tem = tem + event.target.value
+
       this.setState({
         input: "",
         display: tem

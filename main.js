@@ -19,8 +19,8 @@ class App extends React.Component {
 
 
         <table><tbody>
-          <tr><td colSpan="2"> <button className="item13" id="erase" onClick={this.handleClear}>C</button></td>
-            <td><button onClick={this.handleReset} className="item14" id="clear" >CE</button></td>
+          <tr><td colSpan="2"> <button className="item13" id="clear" onClick={this.handleReset} >CE</button></td>
+            <td><button onClick={this.handleClear} className="item14" id="erase" >C</button></td>
             <td><button onClick={this.handleButton} className="item15" value="/" id="divide">:</button></td></tr>
           <tr><td><button onClick={this.handleClick} className="item7" id="seven" value="7">7</button></td>
             <td><button onClick={this.handleClick} className="item8" value="8" id="eight">8</button></td>

@@ -130,8 +130,8 @@ class App extends React.Component {
 
 
     this.setState({
-      input: result,
-      display: result,
+        input: result.toString(),
+      display: result.toString(),
     });
   }
 
